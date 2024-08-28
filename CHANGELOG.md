@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Heyian/filament-google-maps/compare/v1.1.0...v1.1.1) (2024-08-28)
+
+
+### Bug Fixes
+
+* Show how to use the fork in composer ([23abfec](https://github.com/Heyian/filament-google-maps/commit/23abfecb9d57770c3fc8af99a8bef205c7515451))
+
 ## [1.1.0](https://github.com/Heyian/filament-google-maps/compare/v1.0.0...v1.1.0) (2024-08-28)
 
 
