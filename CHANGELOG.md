@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/Heyian/filament-google-maps/compare/v1.0.0...v1.1.0) (2024-08-28)
+
+
+### Features
+
+* Add release-please ([eda7e3e](https://github.com/Heyian/filament-google-maps/commit/eda7e3e95a42fc73958633ed4d4c46d070ac80f9))
+
+
+### Miscellaneous Chores
+
+* **forkMain:** release 1.0.0 ([#3](https://github.com/Heyian/filament-google-maps/issues/3)) ([27e290c](https://github.com/Heyian/filament-google-maps/commit/27e290c749cbcd77d956578a2346a1959bfb2155))
+
 ## 1.0.0 (2024-08-28)
 
 ### Features
