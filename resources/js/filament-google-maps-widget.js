@@ -150,7 +150,9 @@ export default function filamentGoogleMapsWidget({
               fetch(location.icon.url)
                 .then(response => response.text())
                 .then(svgContent => {
-                  const coloredSvg = svgContent.replace(/stroke="[^"]*"/g, `stroke="${location.icon.color}"`);
+                  const coloredSvg = svgContent.replace(/<path[^>]*fill="[^"]*"/, (match) => {
+                    return match.replace(/fill="[^"]*"/, `fill="${location.icon.color}"`);
+                  });
                   
                   const svgBlob = new Blob([coloredSvg], { type: 'image/svg+xml' });
                   const svgUrl = URL.createObjectURL(svgBlob);
