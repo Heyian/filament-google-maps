@@ -1,6 +1,13 @@
 <a name="readme-top"></a>
 
-# Forked
+# Not current anymore
+I'm now working with @cheesegrits on the original repo, anything you see in this fork has been merged on the original repo. This fork will be kept online
+in case someone uses it but it won't be maintained anymore. If you have an issue or a PR, please write it on the original package at
+[cheesegrits/filament-google-maps](https://github.com/cheesegrits/filament-google-maps/).
+
+Thank you.
+
+# Fork
 This is a fork from the original package by cheesegrits. The original package doesn't seem to be maintained anymore.
 This fork is a work in progress, it's primary objective is to get all the pull requests commited in a single repo. The
 original package is available at
