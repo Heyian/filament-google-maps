@@ -144,13 +144,30 @@ export default function filamentGoogleMapsWidget({
 
           if (
             location.icon.hasOwnProperty("type") &&
-            location.icon.type === "svg" &&
-            location.icon.hasOwnProperty("scale")
+            location.icon.type === "svg"
           ) {
-            markerIcon.scaledSize = new google.maps.Size(
-              location.icon.scale[0],
-              location.icon.scale[1]
-            );
+            if (location.icon.hasOwnProperty("color")) {
+              fetch(location.icon.url)
+                .then(response => response.text())
+                .then(svgContent => {
+                  const coloredSvg = svgContent.replace(/<path[^>]*fill="[^"]*"/, (match) => {
+                    return match.replace(/fill="[^"]*"/, `fill="${location.icon.color}"`);
+                  });
+                  
+                  const svgBlob = new Blob([coloredSvg], { type: 'image/svg+xml' });
+                  const svgUrl = URL.createObjectURL(svgBlob);
+                  
+                  markerIcon.url = svgUrl;
+                  marker.setIcon(markerIcon);
+                });
+            }
+
+            if (location.icon.hasOwnProperty("scale")) {
+              markerIcon.scaledSize = new google.maps.Size(
+                location.icon.scale[0],
+                location.icon.scale[1]
+              );
+            }
           }
         }
       }
