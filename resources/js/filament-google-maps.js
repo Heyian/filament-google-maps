@@ -95,6 +95,7 @@ export default function filamentGoogleMapsField({
       "%a5": ["administrative_area_level_5"],
       "%L": ["locality", "postal_town"],
       "%D": ["sublocality"],
+      "%N": ["neighborhood"],
       "%C": ["country"],
       "%c": ["country"],
       "%p": ["premise"],
@@ -180,8 +181,23 @@ export default function filamentGoogleMapsField({
         const searchBox = new google.maps.places.SearchBox(input);
         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         searchBox.addListener("places_changed", () => {
+          const places = searchBox.getPlaces();
+          
+          // Debug logging can be re-enabled here if needed
+          if (debug) {
+            // console.log("=== RAW GOOGLE PLACES SEARCHBOX API RESPONSE ===");
+            // console.log("Places array:", places);
+            // if (places[0]) {
+            //   console.log("First place:", places[0]);
+            //   console.log("Address components:", places[0].address_components);
+            //   console.log("Formatted address:", places[0].formatted_address);
+            //   console.log("Geometry:", places[0].geometry);
+            // }
+            // console.log("==================================================");
+          }
+          
           input.value = "";
-          this.markerLocation = searchBox.getPlaces()[0].geometry.location;
+          this.markerLocation = places[0].geometry.location;
         });
       }
 
@@ -242,6 +258,17 @@ export default function filamentGoogleMapsField({
 
           gAutocomplete.addListener("place_changed", () => {
             const place = gAutocomplete.getPlace();
+
+            // Debug logging can be re-enabled here if needed
+            if (debug) {
+              // console.log("=== RAW GOOGLE PLACES API RESPONSE (Maps) ===");
+              // console.log("Full place object:", place);
+              // console.log("Address components:", place.address_components);
+              // console.log("Formatted address:", place.formatted_address);
+              // console.log("Geometry:", place.geometry);
+              // console.log("Place field value:", place[placeField]);
+              // console.log("==============================================");
+            }
 
             if (!place.geometry || !place.geometry.location) {
               window.alert(
@@ -552,12 +579,19 @@ export default function filamentGoogleMapsField({
 
       address_components.forEach((component) => {
         for (const symbol in this.symbols) {
-          if (this.symbols[symbol].indexOf(component.types[0]) !== -1) {
+          // Check all types in the component, not just the first one
+          const matchingType = component.types.find(type => 
+            this.symbols[symbol].indexOf(type) !== -1
+          );
+          
+          if (matchingType) {
             if (symbol === symbol.toLowerCase()) {
               replacements[symbol] = component.short_name;
             } else {
               replacements[symbol] = component.long_name;
             }
+            // Break after first match to avoid overwriting with duplicate types
+            break;
           }
         }
       });

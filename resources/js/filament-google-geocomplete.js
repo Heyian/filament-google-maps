@@ -36,6 +36,7 @@ export default function filamentGoogleGeocomplete({
       "%a5": ["administrative_area_level_5"],
       "%L": ["locality", "postal_town"],
       "%D": ["sublocality"],
+      "%N": ["neighborhood"],
       "%C": ["country"],
       "%c": ["country"],
       "%p": ["premise"],
@@ -136,6 +137,17 @@ export default function filamentGoogleGeocomplete({
         autocomplete.addListener("place_changed", () => {
           const place = autocomplete.getPlace();
 
+          // Debug logging can be re-enabled here if needed
+          if (debug) {
+            // console.log("=== RAW GOOGLE PLACES API RESPONSE ===");
+            // console.log("Full place object:", place);
+            // console.log("Address components:", place.address_components);
+            // console.log("Formatted address:", place.formatted_address);
+            // console.log("Geometry:", place.geometry);
+            // console.log("Place field value:", place[placeField]);
+            // console.log("==========================================");
+          }
+
           if (!place.geometry || !place.geometry.location) {
             window.alert(
               "No details available for input: '" + place.name + "'"
@@ -166,6 +178,19 @@ export default function filamentGoogleGeocomplete({
                 this.geocoder
                   .geocode({ location: currentLocation })
                   .then((response) => {
+                    // Debug logging can be re-enabled here if needed
+                    if (debug) {
+                      // console.log("=== RAW GOOGLE GEOCODER API RESPONSE ===");
+                      // console.log("Full geocoder response:", response);
+                      // console.log("Results array:", response.results);
+                      // if (response.results[0]) {
+                      //   console.log("First result:", response.results[0]);
+                      //   console.log("Address components:", response.results[0].address_components);
+                      //   console.log("Formatted address:", response.results[0].formatted_address);
+                      // }
+                      // console.log("===========================================");
+                    }
+
                     if (response.results[0]) {
                       geoComplete.setAttribute(
                         "value",
@@ -261,12 +286,19 @@ export default function filamentGoogleGeocomplete({
 
       address_components.forEach((component) => {
         for (const symbol in this.symbols) {
-          if (this.symbols[symbol].indexOf(component.types[0]) !== -1) {
+          // Check all types in the component, not just the first one
+          const matchingType = component.types.find(type => 
+            this.symbols[symbol].indexOf(type) !== -1
+          );
+          
+          if (matchingType) {
             if (symbol === symbol.toLowerCase()) {
               replacements[symbol] = component.short_name;
             } else {
               replacements[symbol] = component.long_name;
             }
+            // Break after first match to avoid overwriting with duplicate types
+            break;
           }
         }
       });

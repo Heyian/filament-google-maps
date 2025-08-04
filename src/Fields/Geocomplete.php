@@ -224,6 +224,7 @@ class Geocomplete extends Field implements Contracts\CanBeLengthConstrained, Con
      * Street Name: %S
      * City (Locality): %L
      * City District (Sub-Locality): %D
+     * Neighborhood: %N
      * Zipcode (Postal Code): %z
      * Admin Level Name: %A1, %A2, %A3, %A4, %A5
      * Admin Level Code: %a1, %a2, %a3, %a4, %a5
