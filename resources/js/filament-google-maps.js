@@ -183,17 +183,17 @@ export default function filamentGoogleMapsField({
         searchBox.addListener("places_changed", () => {
           const places = searchBox.getPlaces();
           
-          // Console log the raw Google Places SearchBox API response when debug is enabled
+          // Debug logging can be re-enabled here if needed
           if (debug) {
-            console.log("=== RAW GOOGLE PLACES SEARCHBOX API RESPONSE ===");
-            console.log("Places array:", places);
-            if (places[0]) {
-              console.log("First place:", places[0]);
-              console.log("Address components:", places[0].address_components);
-              console.log("Formatted address:", places[0].formatted_address);
-              console.log("Geometry:", places[0].geometry);
-            }
-            console.log("==================================================");
+            // console.log("=== RAW GOOGLE PLACES SEARCHBOX API RESPONSE ===");
+            // console.log("Places array:", places);
+            // if (places[0]) {
+            //   console.log("First place:", places[0]);
+            //   console.log("Address components:", places[0].address_components);
+            //   console.log("Formatted address:", places[0].formatted_address);
+            //   console.log("Geometry:", places[0].geometry);
+            // }
+            // console.log("==================================================");
           }
           
           input.value = "";
@@ -259,15 +259,15 @@ export default function filamentGoogleMapsField({
           gAutocomplete.addListener("place_changed", () => {
             const place = gAutocomplete.getPlace();
 
-            // Console log the raw Google Places API response when debug is enabled
+            // Debug logging can be re-enabled here if needed
             if (debug) {
-              console.log("=== RAW GOOGLE PLACES API RESPONSE (Maps) ===");
-              console.log("Full place object:", place);
-              console.log("Address components:", place.address_components);
-              console.log("Formatted address:", place.formatted_address);
-              console.log("Geometry:", place.geometry);
-              console.log("Place field value:", place[placeField]);
-              console.log("==============================================");
+              // console.log("=== RAW GOOGLE PLACES API RESPONSE (Maps) ===");
+              // console.log("Full place object:", place);
+              // console.log("Address components:", place.address_components);
+              // console.log("Formatted address:", place.formatted_address);
+              // console.log("Geometry:", place.geometry);
+              // console.log("Place field value:", place[placeField]);
+              // console.log("==============================================");
             }
 
             if (!place.geometry || !place.geometry.location) {
@@ -597,11 +597,7 @@ export default function filamentGoogleMapsField({
       });
 
       if (debug) {
-        console.log("=== GEOCODER REPLACEMENTS DEBUG (Maps) ===");
-        console.log("Address components processed:", address_components.length);
-        console.log("Symbols mapped:", Object.keys(replacements).length);
-        console.log("Replacements:", replacements);
-        console.log("==========================================");
+        console.log(replacements);
       }
 
       return replacements;

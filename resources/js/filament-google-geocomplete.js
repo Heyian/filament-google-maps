@@ -137,15 +137,15 @@ export default function filamentGoogleGeocomplete({
         autocomplete.addListener("place_changed", () => {
           const place = autocomplete.getPlace();
 
-          // Console log the raw Google Places API response when debug is enabled
+          // Debug logging can be re-enabled here if needed
           if (debug) {
-            console.log("=== RAW GOOGLE PLACES API RESPONSE ===");
-            console.log("Full place object:", place);
-            console.log("Address components:", place.address_components);
-            console.log("Formatted address:", place.formatted_address);
-            console.log("Geometry:", place.geometry);
-            console.log("Place field value:", place[placeField]);
-            console.log("==========================================");
+            // console.log("=== RAW GOOGLE PLACES API RESPONSE ===");
+            // console.log("Full place object:", place);
+            // console.log("Address components:", place.address_components);
+            // console.log("Formatted address:", place.formatted_address);
+            // console.log("Geometry:", place.geometry);
+            // console.log("Place field value:", place[placeField]);
+            // console.log("==========================================");
           }
 
           if (!place.geometry || !place.geometry.location) {
@@ -178,17 +178,17 @@ export default function filamentGoogleGeocomplete({
                 this.geocoder
                   .geocode({ location: currentLocation })
                   .then((response) => {
-                    // Console log the raw Google Geocoder API response when debug is enabled
+                    // Debug logging can be re-enabled here if needed
                     if (debug) {
-                      console.log("=== RAW GOOGLE GEOCODER API RESPONSE ===");
-                      console.log("Full geocoder response:", response);
-                      console.log("Results array:", response.results);
-                      if (response.results[0]) {
-                        console.log("First result:", response.results[0]);
-                        console.log("Address components:", response.results[0].address_components);
-                        console.log("Formatted address:", response.results[0].formatted_address);
-                      }
-                      console.log("===========================================");
+                      // console.log("=== RAW GOOGLE GEOCODER API RESPONSE ===");
+                      // console.log("Full geocoder response:", response);
+                      // console.log("Results array:", response.results);
+                      // if (response.results[0]) {
+                      //   console.log("First result:", response.results[0]);
+                      //   console.log("Address components:", response.results[0].address_components);
+                      //   console.log("Formatted address:", response.results[0].formatted_address);
+                      // }
+                      // console.log("===========================================");
                     }
 
                     if (response.results[0]) {
@@ -304,11 +304,7 @@ export default function filamentGoogleGeocomplete({
       });
 
       if (debug) {
-        console.log("=== GEOCODER REPLACEMENTS DEBUG ===");
-        console.log("Address components processed:", address_components.length);
-        console.log("Symbols mapped:", Object.keys(replacements).length);
-        console.log("Replacements:", replacements);
-        console.log("====================================");
+        console.log(replacements);
       }
 
       return replacements;
