@@ -136,6 +136,17 @@ export default function filamentGoogleGeocomplete({
         autocomplete.addListener("place_changed", () => {
           const place = autocomplete.getPlace();
 
+          // Console log the raw Google Places API response when debug is enabled
+          if (debug) {
+            console.log("=== RAW GOOGLE PLACES API RESPONSE ===");
+            console.log("Full place object:", place);
+            console.log("Address components:", place.address_components);
+            console.log("Formatted address:", place.formatted_address);
+            console.log("Geometry:", place.geometry);
+            console.log("Place field value:", place[placeField]);
+            console.log("==========================================");
+          }
+
           if (!place.geometry || !place.geometry.location) {
             window.alert(
               "No details available for input: '" + place.name + "'"
@@ -166,6 +177,19 @@ export default function filamentGoogleGeocomplete({
                 this.geocoder
                   .geocode({ location: currentLocation })
                   .then((response) => {
+                    // Console log the raw Google Geocoder API response when debug is enabled
+                    if (debug) {
+                      console.log("=== RAW GOOGLE GEOCODER API RESPONSE ===");
+                      console.log("Full geocoder response:", response);
+                      console.log("Results array:", response.results);
+                      if (response.results[0]) {
+                        console.log("First result:", response.results[0]);
+                        console.log("Address components:", response.results[0].address_components);
+                        console.log("Formatted address:", response.results[0].formatted_address);
+                      }
+                      console.log("===========================================");
+                    }
+
                     if (response.results[0]) {
                       geoComplete.setAttribute(
                         "value",

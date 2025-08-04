@@ -180,8 +180,23 @@ export default function filamentGoogleMapsField({
         const searchBox = new google.maps.places.SearchBox(input);
         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         searchBox.addListener("places_changed", () => {
+          const places = searchBox.getPlaces();
+          
+          // Console log the raw Google Places SearchBox API response when debug is enabled
+          if (debug) {
+            console.log("=== RAW GOOGLE PLACES SEARCHBOX API RESPONSE ===");
+            console.log("Places array:", places);
+            if (places[0]) {
+              console.log("First place:", places[0]);
+              console.log("Address components:", places[0].address_components);
+              console.log("Formatted address:", places[0].formatted_address);
+              console.log("Geometry:", places[0].geometry);
+            }
+            console.log("==================================================");
+          }
+          
           input.value = "";
-          this.markerLocation = searchBox.getPlaces()[0].geometry.location;
+          this.markerLocation = places[0].geometry.location;
         });
       }
 
@@ -242,6 +257,17 @@ export default function filamentGoogleMapsField({
 
           gAutocomplete.addListener("place_changed", () => {
             const place = gAutocomplete.getPlace();
+
+            // Console log the raw Google Places API response when debug is enabled
+            if (debug) {
+              console.log("=== RAW GOOGLE PLACES API RESPONSE (Maps) ===");
+              console.log("Full place object:", place);
+              console.log("Address components:", place.address_components);
+              console.log("Formatted address:", place.formatted_address);
+              console.log("Geometry:", place.geometry);
+              console.log("Place field value:", place[placeField]);
+              console.log("==============================================");
+            }
 
             if (!place.geometry || !place.geometry.location) {
               window.alert(
