@@ -518,14 +518,14 @@ class Map extends Field
         return $this->evaluate($this->geoJsonProperty);
     }
 
-    //public function handleGeoJson(array $features): void
-    //{
+    // public function handleGeoJson(array $features): void
+    // {
     //    $geoJsonHandler = $this->getGeoJsonHandler();
     //
     //    $this->evaluate($geoJsonHandler, [
     //        'features' => $features,
     //    ]);
-    //}
+    // }
 
     /**
      * Set the default location for new maps, accepts an array of either [$lat, $lng] or ['lat' => $lat, 'lng' => $lng],
@@ -827,7 +827,7 @@ class Map extends Field
             'mapType'                => $this->getMapType(),
         ]);
 
-        //ray($config);
+        // ray($config);
 
         return json_encode($config);
     }

@@ -279,7 +279,7 @@ class WidgetMap extends Field
             ])
         );
 
-        //ray($config);
+        // ray($config);
 
         return $config;
     }
