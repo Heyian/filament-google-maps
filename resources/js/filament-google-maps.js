@@ -95,6 +95,7 @@ export default function filamentGoogleMapsField({
       "%a5": ["administrative_area_level_5"],
       "%L": ["locality", "postal_town"],
       "%D": ["sublocality"],
+      "%N": ["neighborhood"],
       "%C": ["country"],
       "%c": ["country"],
       "%p": ["premise"],
@@ -578,18 +579,29 @@ export default function filamentGoogleMapsField({
 
       address_components.forEach((component) => {
         for (const symbol in this.symbols) {
-          if (this.symbols[symbol].indexOf(component.types[0]) !== -1) {
+          // Check all types in the component, not just the first one
+          const matchingType = component.types.find(type => 
+            this.symbols[symbol].indexOf(type) !== -1
+          );
+          
+          if (matchingType) {
             if (symbol === symbol.toLowerCase()) {
               replacements[symbol] = component.short_name;
             } else {
               replacements[symbol] = component.long_name;
             }
+            // Break after first match to avoid overwriting with duplicate types
+            break;
           }
         }
       });
 
       if (debug) {
-        console.log(replacements);
+        console.log("=== GEOCODER REPLACEMENTS DEBUG (Maps) ===");
+        console.log("Address components processed:", address_components.length);
+        console.log("Symbols mapped:", Object.keys(replacements).length);
+        console.log("Replacements:", replacements);
+        console.log("==========================================");
       }
 
       return replacements;

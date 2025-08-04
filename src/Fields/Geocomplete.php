@@ -224,6 +224,7 @@ class Geocomplete extends Field implements Contracts\CanBeLengthConstrained, Con
      * Street Name: %S
      * City (Locality): %L
      * City District (Sub-Locality): %D
+     * Neighborhood: %N
      * Zipcode (Postal Code): %z
      * Admin Level Name: %A1, %A2, %A3, %A4, %A5
      * Admin Level Code: %a1, %a2, %a3, %a4, %a5
@@ -242,7 +243,7 @@ class Geocomplete extends Field implements Contracts\CanBeLengthConstrained, Con
 
     public function getReverseGeocode(): array
     {
-        $fields     = $this->evaluate($this->reverseGeocode);
+        $fields = $this->evaluate($this->reverseGeocode);
         $statePaths = [];
 
         foreach ($fields as $field => $format) {
@@ -278,7 +279,7 @@ class Geocomplete extends Field implements Contracts\CanBeLengthConstrained, Con
     {
         $callback = $this->reverseGeocodeUsing;
 
-        if (! $callback) {
+        if (!$callback) {
             return $this;
         }
 
@@ -377,7 +378,7 @@ class Geocomplete extends Field implements Contracts\CanBeLengthConstrained, Con
                 if ($component->getGeocodeOnLoad()) {
                     $state = static::getLocationState($state);
 
-                    if (! MapsHelper::isLocationEmpty($state)) {
+                    if (!MapsHelper::isLocationEmpty($state)) {
                         $state['formatted_address'] = MapsHelper::reverseGeocode($state);
                     } else {
                         $state['formatted_address'] = '';
@@ -407,18 +408,18 @@ class Geocomplete extends Field implements Contracts\CanBeLengthConstrained, Con
     public function getGeocompleteConfig(): string
     {
         $config = json_encode([
-            'filterName'           => $this->getFilterName(),
-            'statePath'            => $this->getStatePath(),
-            'isLocation'           => $this->getIsLocation(),
+            'filterName' => $this->getFilterName(),
+            'statePath' => $this->getStatePath(),
+            'isLocation' => $this->getIsLocation(),
             'reverseGeocodeFields' => $this->getReverseGeocode(),
-            'reverseGeocodeUsing'  => $this->getReverseGeocodeUsing(),
-            'latLngFields'         => $this->getUpdateLatLngFields(),
-            'types'                => $this->getTypes(),
-            'countries'            => $this->getCountries(),
-            'placeField'           => $this->getPlaceField(),
-            'debug'                => $this->getDebug(),
-            'gmaps'                => $this->getMapsUrl(),
-            'minChars'             => $this->getMinChars(),
+            'reverseGeocodeUsing' => $this->getReverseGeocodeUsing(),
+            'latLngFields' => $this->getUpdateLatLngFields(),
+            'types' => $this->getTypes(),
+            'countries' => $this->getCountries(),
+            'placeField' => $this->getPlaceField(),
+            'debug' => $this->getDebug(),
+            'gmaps' => $this->getMapsUrl(),
+            'minChars' => $this->getMinChars(),
         ]);
 
         // ray($config);
