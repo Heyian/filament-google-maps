@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.2](https://github.com/Heyian/filament-google-maps/compare/v1.1.1...v1.1.2) (2025-08-04)
+
+
+### Bug Fixes
+
+* Add color to Icon Marker on MapWidget ([df58643](https://github.com/Heyian/filament-google-maps/commit/df58643e11670bda3c4166fee965047e9ec75fea))
+* Changed the stroke color instead of the fill color ([f2fc7bd](https://github.com/Heyian/filament-google-maps/commit/f2fc7bd8db7c56e01b436c2db0fe3ec618e45ae6))
+* forgot to build ([4c39be9](https://github.com/Heyian/filament-google-maps/commit/4c39be93b8b709e9c12566732e3404252ed71ce9))
+* Revert to adjust fill color, but only in path and not in rect ([1ce2081](https://github.com/Heyian/filament-google-maps/commit/1ce20810a5e2d9545b8c940536359e29650f03c6))
+
+
+### Miscellaneous Chores
+
+* fix code style ([17e8a22](https://github.com/Heyian/filament-google-maps/commit/17e8a227421134b838f646108cc10fc68953a55e))
+
 ## [1.1.1](https://github.com/Heyian/filament-google-maps/compare/v1.1.0...v1.1.1) (2024-08-28)
 
 
