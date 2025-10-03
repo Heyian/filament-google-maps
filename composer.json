@@ -1,57 +1,57 @@
 {
-    "name": "cheesegrits/filament-google-maps",
-    "description": "A Google Maps package for Filament PHP with field, column and widget",
-    "type": "library",
-    "license": "MIT",
-    "homepage": "https://github.com/cheesegrits/filament-google-maps",
-    "require": {
-        "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.9",
-        "guzzlehttp/guzzle": "^7.5",
-        "geocoder-php/google-maps-provider": "^4.7",
-        "php-http/guzzle7-adapter": "^1.0",
-        "spatie/guzzle-rate-limiter-middleware": "^2.0",
-        "php-http/message": "^1.13",
-        "ryangjchandler/blade-capture-directive": "^0.3|^1.0",
-        "mastani/laravel-google-static-map": "^2.2",
-        "laravel/prompts": "^0.1.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Cheesegrits\\FilamentGoogleMaps\\": "src/",
-            "Cheesegrits\\FilamentGoogleMaps\\Tests\\": "tests/src",
-            "Cheesegrits\\FilamentGoogleMaps\\Tests\\Database\\Factories\\": "tests/database/factories"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Cheesegrits\\FilamentGoogleMaps\\FilamentGoogleMapsServiceProvider"
-            ]
-        }
-    },
-    "authors": [
-        {
-            "name": "Hugh Messenger",
-            "email": "hugh.messenger@gmail.com"
-        }
-    ],
-    "require-dev": {
-        "filament/filament": "^3.0",
-        "pestphp/pest": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "orchestra/testbench": "^7.11|^8.0",
-        "pestphp/pest-plugin-livewire": "^2.0",
-        "nonsapiens/realaddressfactory": "^2.0",
-        "timacdonald/log-fake": "^2.0",
-        "laravel/pint": "^1.6"
-    },
-    "config": {
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "cheesegrits/filament-google-maps",
+  "description": "A Google Maps package for Filament PHP with field, column and widget",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/cheesegrits/filament-google-maps",
+  "require": {
+    "php": "^8.0",
+    "spatie/laravel-package-tools": "^1.9",
+    "guzzlehttp/guzzle": "^7.5",
+    "geocoder-php/google-maps-provider": "^4.7",
+    "php-http/guzzle7-adapter": "^1.0",
+    "spatie/guzzle-rate-limiter-middleware": "^2.0",
+    "php-http/message": "^1.13",
+    "ryangjchandler/blade-capture-directive": "^0.3|^1.0",
+    "mastani/laravel-google-static-map": "^2.2",
+    "laravel/prompts": "^0.3.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cheesegrits\\FilamentGoogleMaps\\": "src/",
+      "Cheesegrits\\FilamentGoogleMaps\\Tests\\": "tests/src",
+      "Cheesegrits\\FilamentGoogleMaps\\Tests\\Database\\Factories\\": "tests/database/factories"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Cheesegrits\\FilamentGoogleMaps\\FilamentGoogleMapsServiceProvider"
+      ]
+    }
+  },
+  "authors": [
+    {
+      "name": "Hugh Messenger",
+      "email": "hugh.messenger@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "filament/filament": "^3.0",
+    "pestphp/pest": "^2.0",
+    "pestphp/pest-plugin-laravel": "^2.0",
+    "orchestra/testbench": "^7.11|^8.0",
+    "pestphp/pest-plugin-livewire": "^2.0",
+    "nonsapiens/realaddressfactory": "^2.0",
+    "timacdonald/log-fake": "^2.0",
+    "laravel/pint": "^1.6"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "php-http/discovery": true
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
