@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/Heyian/filament-google-maps/compare/v1.1.2...v1.1.3) (2025-10-03)
+
+
+### Bug Fixes
+
+* **composer.json:** update laravel/prompts dependency to ^0.3.7 ([0faa2ad](https://github.com/Heyian/filament-google-maps/commit/0faa2adb3a42063e2d7a22cd9570a9cbc90aa0a8))
+
 ## [1.1.2](https://github.com/Heyian/filament-google-maps/compare/v1.1.1...v1.1.2) (2025-08-04)
 
 
