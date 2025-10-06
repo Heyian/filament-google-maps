@@ -1,19 +1,19 @@
 export default function filamentGoogleGeocomplete({
-  setStateUsing,
-  debug,
-  statePath,
-  gmaps,
-  filterName,
-  reverseGeocodeFields,
-  latLngFields,
-  types,
-  countries,
-  isLocation,
-  placeField,
-  reverseGeocodeUsing,
-  hasReverseGeocodeUsing = false,
-  minChars,
-}) {
+                                                    setStateUsing,
+                                                    debug,
+                                                    statePath,
+                                                    gmaps,
+                                                    filterName,
+                                                    reverseGeocodeFields,
+                                                    latLngFields,
+                                                    types,
+                                                    countries,
+                                                    isLocation,
+                                                    placeField,
+                                                    reverseGeocodeUsing,
+                                                    hasReverseGeocodeUsing = false,
+                                                    minChars
+                                                  }) {
   const geocompleteEl = isLocation ? statePath + "-fgm-address" : statePath;
   const geoComplete = document.getElementById(geocompleteEl);
 
@@ -40,10 +40,10 @@ export default function filamentGoogleGeocomplete({
       "%C": ["country"],
       "%c": ["country"],
       "%p": ["premise"],
-      "%P": ["premise"],
+      "%P": ["premise"]
     },
 
-    loadGMaps: function () {
+    loadGMaps: function() {
       if (!document.getElementById("filament-google-maps-google-maps-js")) {
         const script = document.createElement("script");
         script.id = "filament-google-maps-google-maps-js";
@@ -51,11 +51,11 @@ export default function filamentGoogleGeocomplete({
         script.src = gmaps + "&callback=filamentGoogleMapsAsyncLoad";
         document.head.appendChild(script);
       } else {
-        const waitForGlobal = function (key, callback) {
+        const waitForGlobal = function(key, callback) {
           if (window[key]) {
             callback();
           } else {
-            setTimeout(function () {
+            setTimeout(function() {
               waitForGlobal(key, callback);
             }, 100);
           }
@@ -63,42 +63,42 @@ export default function filamentGoogleGeocomplete({
 
         waitForGlobal(
           "filamentGoogleMapsAPILoaded",
-          function () {
+          function() {
             this.createAutocomplete();
           }.bind(this)
         );
       }
     },
 
-    init: function (mapEl) {
+    init: function(mapEl) {
       console.log("geocomplete init");
       this.mapEl = mapEl;
 
       let typingTimer;
       const doneTypingInterval = 300; // milliseconds
 
-      geoComplete.addEventListener('input', () => {
+      geoComplete.addEventListener("input", () => {
         clearTimeout(typingTimer);
 
         if (geoComplete.value.length >= minChars) {
           typingTimer = setTimeout(() => {
-            console.log('minChars met, loading GMaps');
+            console.log("minChars met, loading GMaps");
             this.loadGMaps();
           }, doneTypingInterval);
         } else {
-          console.log('minChars not met');
+          console.log("minChars not met");
         }
       });
-      },
+    },
 
-    createAutocomplete: function () {
+    createAutocomplete: function() {
       window.filamentGoogleMapsAPILoaded = true;
 
       let fields = [
         "address_components",
         "formatted_address",
         "geometry",
-        "name",
+        "name"
       ];
 
       if (!fields.includes(placeField)) {
@@ -108,13 +108,13 @@ export default function filamentGoogleGeocomplete({
       const geocompleteOptions = {
         fields: fields,
         strictBounds: false,
-        types: types,
+        types: types
       };
 
       if (geoComplete) {
         window.addEventListener(
           "keydown",
-          function (e) {
+          function(e) {
             if (e.key === "U+000A" || e.key === "Enter" || e.code === "Enter") {
               if (e.target.nodeName === "INPUT" && e.target.type === "text") {
                 e.preventDefault();
@@ -131,7 +131,7 @@ export default function filamentGoogleGeocomplete({
         );
 
         autocomplete.setComponentRestrictions({
-          country: countries,
+          country: countries
         });
 
         autocomplete.addListener("place_changed", () => {
@@ -172,7 +172,7 @@ export default function filamentGoogleGeocomplete({
                 var currentLongitude = position.coords.longitude;
                 var currentLocation = {
                   lat: currentLatitude,
-                  lng: currentLongitude,
+                  lng: currentLongitude
                 };
 
                 this.geocoder
@@ -207,12 +207,12 @@ export default function filamentGoogleGeocomplete({
         }
       }
     },
-    setLocation: async function (place) {
+    setLocation: async function(place) {
       if (isLocation) {
         await setStateUsing(statePath, {
           lat: place.geometry.location.lat(),
           lng: place.geometry.location.lng(),
-          formatted_address: place[placeField],
+          formatted_address: place[placeField]
         });
       } else {
         await setStateUsing(statePath, place[placeField]);
@@ -238,7 +238,7 @@ export default function filamentGoogleGeocomplete({
         }
       }
     },
-    updateReverseGeocode: async function (place) {
+    updateReverseGeocode: async function(place) {
       if (this.hasReverseGeocode()) {
         if (place.address_components) {
           //await setStateUsing(config.autocomplete, response.results[0].formatted_address);
@@ -267,7 +267,7 @@ export default function filamentGoogleGeocomplete({
         }
       }
     },
-    updateLatLng: async function (place) {
+    updateLatLng: async function(place) {
       if (Object.keys(latLngFields).length > 0) {
         if (place.geometry) {
           await setStateUsing(
@@ -281,16 +281,16 @@ export default function filamentGoogleGeocomplete({
         }
       }
     },
-    getReplacements: function (address_components) {
+    getReplacements: function(address_components) {
       let replacements = {};
 
       address_components.forEach((component) => {
         for (const symbol in this.symbols) {
           // Check all types in the component, not just the first one
-          const matchingType = component.types.find(type => 
+          const matchingType = component.types.find(type =>
             this.symbols[symbol].indexOf(type) !== -1
           );
-          
+
           if (matchingType) {
             if (symbol === symbol.toLowerCase()) {
               replacements[symbol] = component.short_name;
@@ -309,10 +309,14 @@ export default function filamentGoogleGeocomplete({
 
       return replacements;
     },
-    hasReverseGeocode: function () {
+    hasReverseGeocode: function() {
       return (
         Object.keys(reverseGeocodeFields).length > 0 || hasReverseGeocodeUsing
       );
-    },
+    }
   };
+}
+// Expose globally for Filament 4's Alpine x-load system
+if (typeof window !== "undefined") {
+  window.filamentGoogleGeocomplete = filamentGoogleGeocomplete;
 }
