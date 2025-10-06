@@ -2,20 +2,19 @@
 
 namespace Cheesegrits\FilamentGoogleMaps\Widgets;
 
-use Filament\Widgets\Widget;
-use Filament\Widgets\Concerns\CanPoll;
 use Cheesegrits\FilamentGoogleMaps\Helpers\MapsHelper;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Widgets;
+use Filament\Widgets\Concerns\CanPoll;
+use Filament\Widgets\Widget;
 
 class MapWidget extends Widget implements HasActions, HasForms
 {
+    use CanPoll;
     use InteractsWithActions;
     use InteractsWithForms;
-    use CanPoll;
 
     protected ?array $cachedData = null;
 

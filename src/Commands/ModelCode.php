@@ -2,9 +2,9 @@
 
 namespace Cheesegrits\FilamentGoogleMaps\Commands;
 
-use Throwable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Throwable;
 
 use function Laravel\Prompts\text;
 

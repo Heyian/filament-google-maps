@@ -2,10 +2,9 @@
 
 namespace Cheesegrits\FilamentGoogleMaps\Widgets;
 
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Concerns\InteractsWithTable;
 use Closure;
-use Filament\Tables;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
