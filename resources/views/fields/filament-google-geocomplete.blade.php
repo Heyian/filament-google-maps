@@ -19,28 +19,28 @@
 
 <x-dynamic-component :component="$getFieldWrapperView()" :field="$field">
     <x-filament::input.wrapper
-        :disabled="$isDisabled"
-        :inline-prefix="$isPrefixInline"
-        :inline-suffix="$isSuffixInline"
-        :prefix="$prefixLabel"
-        :prefix-actions="$prefixActions"
-        :prefix-icon="$prefixIcon"
-        :suffix="$suffixLabel"
-        :suffix-actions="$suffixActions"
-        :suffix-icon="$suffixIcon"
-        :valid="! $errors->has($statePath)"
-        class="fi-fo-text-input"
-        :attributes="
+            :disabled="$isDisabled"
+            :inline-prefix="$isPrefixInline"
+            :inline-suffix="$isSuffixInline"
+            :prefix="$prefixLabel"
+            :prefix-actions="$prefixActions"
+            :prefix-icon="$prefixIcon"
+            :suffix="$suffixLabel"
+            :suffix-actions="$suffixActions"
+            :suffix-icon="$suffixIcon"
+            :valid="! $errors->has($statePath)"
+            class="fi-fo-text-input"
+            :attributes="
             \Filament\Support\prepare_inherited_attributes($getExtraAttributeBag())
                 ->class(['overflow-hidden'])
         "
     >
         <div
-            class="w-full"
-            x-ignore
-            ax-load
-            ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-google-maps-geocomplete', 'cheesegrits/filament-google-maps') }}"
-            x-data="filamentGoogleGeocomplete({
+                class="w-full"
+                x-ignore
+                x-load
+                x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-google-maps-geocomplete', 'cheesegrits/filament-google-maps') }}"
+                x-data="filamentGoogleGeocomplete({
                         setStateUsing: async (path, state) => {
                             return await $wire.set(path, state)
                         },
@@ -60,7 +60,7 @@
                         gmaps: @js($getMapsUrl()),
                         minChars: @js($getMinChars()),
                     })"
-            wire:ignore
+                wire:ignore
         >
             {{-- <input --}}
             {{-- x-bind:class="{ --}}
@@ -97,15 +97,17 @@
             {{-- }} --}}
             {{-- /> --}}
             <x-filament::input
-                :attributes="
+                    :attributes="
                     \Filament\Support\prepare_inherited_attributes($getExtraInputAttributeBag())
                         ->merge($extraAlpineAttributes, escape: false)
                         ->merge([
+                            'class'                                                                 => 'filament-forms-input',
+                            'x-ref'                                                                 => 'input',
                             'autocapitalize'                                                        => $getAutocapitalize(),
                             'autocomplete'                                                          => $getAutocomplete(),
                             'autofocus'                                                             => $isAutofocused(),
                             'disabled'                                                              => $isDisabled,
-                            'id'                                                                    => $id,
+                            'id'                                                                    => $getStatePath(),
                             'inlinePrefix'                                                          => $isPrefixInline && (count($prefixActions) || $prefixIcon || filled($prefixLabel)),
                             'inlineSuffix'                                                          => $isSuffixInline && (count($suffixActions) || $suffixIcon || filled($suffixLabel)),
                             'inputmode'                                                             => $getInputMode(),
@@ -129,9 +131,9 @@
 
             @if ($getIsLocation())
                 <input
-                    {{ $applyStateBindingModifiers('wire:model') }}="{{ $getStatePath() }}"
-                    type="hidden"
-                    id="{{ $getId() }}"
+                {{ $applyStateBindingModifiers('wire:model') }}="{{ $getStatePath() }}"
+                type="hidden"
+                id="{{ $getStatePath()() }}"
                 />
             @endif
         </div>

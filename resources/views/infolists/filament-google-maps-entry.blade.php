@@ -4,10 +4,10 @@
     @endphp
 
     <div
-        x-ignore
-        ax-load
-        ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-google-maps-entry', 'cheesegrits/filament-google-maps') }}"
-        x-data="filamentGoogleMapsField({
+            x-ignore
+            x-load
+            x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-google-maps-entry', 'cheesegrits/filament-google-maps') }}"
+            x-data="filamentGoogleMapsField({
                     state: @js($getState()),
                     defaultLocation: @js($getDefaultLocation()),
                     controls: @js($getMapControls(false)),
@@ -19,13 +19,13 @@
                     gmaps: @js($getMapsUrl()),
                     mapEl: $refs.map,
                 })"
-        id="{{ $getId() . '-alpine' }}"
-        wire:ignore
+            id="{{ $getId() . '-alpine' }}"
+            wire:ignore
     >
         <div
-            x-ref="map"
-            class="w-full"
-            style="
+                x-ref="map"
+                class="w-full"
+                style="
                 height: {{ $getHeight() }};
                 min-height: 30vh;
                 z-index: 1 !important;
