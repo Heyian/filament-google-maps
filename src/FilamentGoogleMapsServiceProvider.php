@@ -2,6 +2,12 @@
 
 namespace Cheesegrits\FilamentGoogleMaps;
 
+use Cheesegrits\FilamentGoogleMaps\Commands\ModelCode;
+use Cheesegrits\FilamentGoogleMaps\Commands\GeocodeTable;
+use Cheesegrits\FilamentGoogleMaps\Commands\Geocode;
+use Cheesegrits\FilamentGoogleMaps\Commands\ReverseGeocodeTable;
+use Cheesegrits\FilamentGoogleMaps\Commands\ReverseGeocode;
+use Cheesegrits\FilamentGoogleMaps\Commands\MakeWidgetCommand;
 use Cheesegrits\FilamentGoogleMaps\Widgets\MapTableWidget;
 use Cheesegrits\FilamentGoogleMaps\Widgets\MapWidget;
 use Filament\Support\Assets\AlpineComponent;
@@ -31,12 +37,12 @@ class FilamentGoogleMapsServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         $commands = [
-            Commands\ModelCode::class,
-            Commands\GeocodeTable::class,
-            Commands\Geocode::class,
-            Commands\ReverseGeocodeTable::class,
-            Commands\ReverseGeocode::class,
-            Commands\MakeWidgetCommand::class,
+            ModelCode::class,
+            GeocodeTable::class,
+            Geocode::class,
+            ReverseGeocodeTable::class,
+            ReverseGeocode::class,
+            MakeWidgetCommand::class,
         ];
 
         $aliases = [];

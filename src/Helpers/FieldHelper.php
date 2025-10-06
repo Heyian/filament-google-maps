@@ -2,7 +2,7 @@
 
 namespace Cheesegrits\FilamentGoogleMaps\Helpers;
 
-use Filament\Forms\Components\Component;
+use Filament\Schemas\Components\Component;
 
 class FieldHelper
 {
