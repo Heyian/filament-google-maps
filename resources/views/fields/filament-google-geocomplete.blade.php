@@ -133,7 +133,7 @@
                 <input
                 {{ $applyStateBindingModifiers('wire:model') }}="{{ $getStatePath() }}"
                 type="hidden"
-                id="{{ $getStatePath()() }}"
+                id="{{ $getStatePath() }}"
                 />
             @endif
         </div>
