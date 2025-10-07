@@ -1,25 +1,26 @@
 export default function filamentGoogleGeocomplete({
-                                                    setStateUsing,
-                                                    debug,
-                                                    statePath,
-                                                    gmaps,
-                                                    filterName,
-                                                    reverseGeocodeFields,
-                                                    latLngFields,
-                                                    types,
-                                                    countries,
-                                                    isLocation,
-                                                    placeField,
-                                                    reverseGeocodeUsing,
-                                                    hasReverseGeocodeUsing = false,
-                                                    minChars
-                                                  }) {
+  setStateUsing,
+  debug,
+  statePath,
+  gmaps,
+  filterName,
+  reverseGeocodeFields,
+  latLngFields,
+  types,
+  countries,
+  isLocation,
+  placeField,
+  reverseGeocodeUsing,
+  hasReverseGeocodeUsing = false,
+  minChars,
+}) {
   const geocompleteEl = isLocation ? statePath + "-fgm-address" : statePath;
-  const geoComplete = document.getElementById(geocompleteEl);
-
+  
   return {
     geocoder: null,
     mapEl: null,
+    geoComplete: null, // Store it here
+    geocompleteEl: geocompleteEl, // Store the ID
     symbols: {
       "%n": ["street_number"],
       "%z": ["postal_code"],
@@ -40,10 +41,10 @@ export default function filamentGoogleGeocomplete({
       "%C": ["country"],
       "%c": ["country"],
       "%p": ["premise"],
-      "%P": ["premise"]
+      "%P": ["premise"],
     },
 
-    loadGMaps: function() {
+    loadGMaps: function () {
       if (!document.getElementById("filament-google-maps-google-maps-js")) {
         const script = document.createElement("script");
         script.id = "filament-google-maps-google-maps-js";
@@ -51,11 +52,11 @@ export default function filamentGoogleGeocomplete({
         script.src = gmaps + "&callback=filamentGoogleMapsAsyncLoad";
         document.head.appendChild(script);
       } else {
-        const waitForGlobal = function(key, callback) {
+        const waitForGlobal = function (key, callback) {
           if (window[key]) {
             callback();
           } else {
-            setTimeout(function() {
+            setTimeout(function () {
               waitForGlobal(key, callback);
             }, 100);
           }
@@ -63,24 +64,33 @@ export default function filamentGoogleGeocomplete({
 
         waitForGlobal(
           "filamentGoogleMapsAPILoaded",
-          function() {
+          function () {
             this.createAutocomplete();
           }.bind(this)
         );
       }
     },
 
-    init: function(mapEl) {
+    init: function (mapEl) {
       console.log("geocomplete init");
       this.mapEl = mapEl;
 
-      let typingTimer;
-      const doneTypingInterval = 300; // milliseconds
+      // NOW get the element when DOM is ready
+      this.geoComplete = document.getElementById(this.geocompleteEl);
+      
+      if (!this.geoComplete) {
+        console.error('Geocomplete input element not found with ID:', this.geocompleteEl);
+        console.log('Available elements:', document.querySelectorAll('input[id*="location"]'));
+        return;
+      }
 
-      geoComplete.addEventListener("input", () => {
+      let typingTimer;
+      const doneTypingInterval = 300;
+
+      this.geoComplete.addEventListener("input", () => {
         clearTimeout(typingTimer);
 
-        if (geoComplete.value.length >= minChars) {
+        if (this.geoComplete.value.length >= minChars) {
           typingTimer = setTimeout(() => {
             console.log("minChars met, loading GMaps");
             this.loadGMaps();
