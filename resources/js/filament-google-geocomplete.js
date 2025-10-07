@@ -14,13 +14,10 @@ export default function filamentGoogleGeocomplete({
   hasReverseGeocodeUsing = false,
   minChars,
 }) {
-  const geocompleteEl = isLocation ? statePath + "-fgm-address" : statePath;
-  
   return {
     geocoder: null,
     mapEl: null,
     geoComplete: null, // Store it here
-    geocompleteEl: geocompleteEl, // Store the ID
     symbols: {
       "%n": ["street_number"],
       "%z": ["postal_code"],
@@ -75,12 +72,12 @@ export default function filamentGoogleGeocomplete({
       console.log("geocomplete init");
       this.mapEl = mapEl;
 
-      // NOW get the element when DOM is ready
-      this.geoComplete = document.getElementById(this.geocompleteEl);
+      // Find the input element within this Alpine component's scope
+      // Use $refs.input which is defined in the Blade template with x-ref="input"
+      this.geoComplete = this.$refs.input;
       
       if (!this.geoComplete) {
-        console.error('Geocomplete input element not found with ID:', this.geocompleteEl);
-        console.log('Available elements:', document.querySelectorAll('input[id*="location"]'));
+        console.error('Geocomplete input element not found using $refs.input');
         return;
       }
 
@@ -121,7 +118,7 @@ export default function filamentGoogleGeocomplete({
         types: types
       };
 
-      if (geoComplete) {
+      if (this.geoComplete) {
         window.addEventListener(
           "keydown",
           function(e) {
@@ -136,7 +133,7 @@ export default function filamentGoogleGeocomplete({
         );
 
         const autocomplete = new google.maps.places.Autocomplete(
-          geoComplete,
+          this.geoComplete,
           geocompleteOptions
         );
 
@@ -202,7 +199,7 @@ export default function filamentGoogleGeocomplete({
                     }
 
                     if (response.results[0]) {
-                      geoComplete.setAttribute(
+                      this.geoComplete.setAttribute(
                         "value",
                         response.results[0].formatted_address
                       );
