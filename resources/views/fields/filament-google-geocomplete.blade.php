@@ -40,26 +40,27 @@
                 x-ignore
                 x-load
                 x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-google-maps-geocomplete', 'cheesegrits/filament-google-maps') }}"
-                x-data="filamentGoogleGeocomplete({
-                        setStateUsing: async (path, state) => {
-                            return await $wire.set(path, state)
-                        },
-                        reverseGeocodeUsing: (results) => {
-                            $wire.reverseGeocodeUsing(@js($statePath), results)
-                        },
-                        filterName: @js($getFilterName()),
-                        statePath: @js($getStatePath()),
-                        isLocation: @js($getIsLocation()),
-                        reverseGeocodeFields: @js($getReverseGeocode()),
-                        hasReverseGeocodeUsing: @js($getReverseGeocodeUsing()),
-                        latLngFields: @js($getUpdateLatLngFields()),
-                        types: @js($getTypes()),
-                        placeField: @js($getPlaceField()),
-                        countries: @js($getCountries()),
-                        debug: @js($getDebug()),
-                        gmaps: @js($getMapsUrl()),
-                        minChars: @js($getMinChars()),
-                    })"
+            x-data="filamentGoogleGeocomplete({
+                    setStateUsing: async (path, state) => {
+                        return await $wire.set(path, state)
+                    },
+                    reverseGeocodeUsing: (results) => {
+                        $wire.reverseGeocodeUsing(@js($statePath), results)
+                    },
+                    filterName: @js($getFilterName()),
+                    statePath: @js($getStatePath()),
+                    elementId: @js($id),
+                    isLocation: @js($getIsLocation()),
+                    reverseGeocodeFields: @js($getReverseGeocode()),
+                    hasReverseGeocodeUsing: @js($getReverseGeocodeUsing()),
+                    latLngFields: @js($getUpdateLatLngFields()),
+                    types: @js($getTypes()),
+                    placeField: @js($getPlaceField()),
+                    countries: @js($getCountries()),
+                    debug: @js($getDebug()),
+                    gmaps: @js($getMapsUrl()),
+                    minChars: @js($getMinChars()),
+                })"
                 wire:ignore
         >
             {{-- <input --}}

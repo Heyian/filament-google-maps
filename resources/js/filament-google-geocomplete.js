@@ -2,6 +2,7 @@ export default function filamentGoogleGeocomplete({
   setStateUsing,
   debug,
   statePath,
+  elementId,
   gmaps,
   filterName,
   reverseGeocodeFields,
@@ -18,6 +19,7 @@ export default function filamentGoogleGeocomplete({
     geocoder: null,
     mapEl: null,
     geoComplete: null, // Store it here
+    elementId: elementId, // Store the actual element ID
     symbols: {
       "%n": ["street_number"],
       "%z": ["postal_code"],
@@ -167,7 +169,9 @@ export default function filamentGoogleGeocomplete({
           this.updateLatLng(place);
         });
 
-        const geoLocate = document.getElementById(statePath + "-geolocate");
+        // Construct geolocate button ID using the actual element ID
+        const geolocateId = this.elementId.replace('-fgm-address', '') + '-geolocate';
+        const geoLocate = document.getElementById(geolocateId);
 
         if (geoLocate) {
           this.geocoder = new google.maps.Geocoder();

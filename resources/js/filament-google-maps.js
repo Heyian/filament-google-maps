@@ -221,7 +221,24 @@ export default function filamentGoogleMapsField({
       }
 
       if (autocomplete) {
-        const geoComplete = document.getElementById(autocomplete);
+        // Try to find the autocomplete input element
+        // In Filament 4, the ID might be different, so try multiple approaches
+        let geoComplete = document.getElementById(autocomplete);
+        
+        // If not found by ID, try to find by wire:model attribute
+        if (!geoComplete) {
+          const wireModelSelectors = [
+            `input[wire\\:model="${autocomplete}"]`,
+            `input[wire\\:model\\.live="${autocomplete}"]`,
+            `input[wire\\:model\\.defer="${autocomplete}"]`,
+            `input[wire\\:model\\.blur="${autocomplete}"]`
+          ];
+          
+          for (const selector of wireModelSelectors) {
+            geoComplete = document.querySelector(selector);
+            if (geoComplete) break;
+          }
+        }
 
         if (geoComplete) {
           window.addEventListener(
